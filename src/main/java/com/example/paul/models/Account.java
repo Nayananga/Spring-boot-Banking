@@ -1,5 +1,7 @@
 package com.example.paul.models;
 
+import com.example.paul.constants.CURRENCY;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,13 +29,16 @@ public class Account {
 
     private transient List<Transaction> transactions;
 
+    private CURRENCY currency;
+
     protected Account() {}
-    public Account(String bankName, String ownerName, String generateSortCode, String generateAccountNumber, double currentBalance) {
+    public Account(String bankName, String ownerName, String generateSortCode, String generateAccountNumber, double currentBalance, CURRENCY currency) {
         this.sortCode = generateSortCode;
         this.accountNumber = generateAccountNumber;
         this.currentBalance = currentBalance;
         this.bankName = bankName;
         this.ownerName = ownerName;
+        this.currency = currency;
     }
     public Account(long id, String sortCode, String accountNumber, double currentBalance, String bankName, String ownerName) {
         this.id = id;
@@ -93,6 +98,14 @@ public class Account {
     public List<Transaction> getTransactions() {
         return transactions;
     }
+    public CURRENCY getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(CURRENCY currency) {
+        this.currency = currency;
+    }
+
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
@@ -106,6 +119,7 @@ public class Account {
                 ", currentBalance=" + currentBalance +
                 ", bankName='" + bankName + '\'' +
                 ", ownerName='" + ownerName + '\'' +
+                ", currency='" + currency + '\'' +
                 '}';
     }
 }

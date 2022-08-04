@@ -1,5 +1,6 @@
 package com.example.paul.services;
 
+import com.example.paul.constants.CURRENCY;
 import com.example.paul.models.Account;
 import com.example.paul.repositories.AccountRepository;
 import com.example.paul.repositories.TransactionRepository;
@@ -39,6 +40,8 @@ public class AccountService {
     public Account createAccount(String bankName, String ownerName) {
         CodeGenerator codeGenerator = new CodeGenerator();
         Account newAccount = new Account(bankName, ownerName, codeGenerator.generateSortCode(), codeGenerator.generateAccountNumber(), 0.00);
+//        Added this line to compile code
+//        Account newAccount = new Account(bankName, ownerName, codeGenerator.generateSortCode(), codeGenerator.generateAccountNumber(), 0.00, CURRENCY.USD);
         return accountRepository.save(newAccount);
     }
 }
