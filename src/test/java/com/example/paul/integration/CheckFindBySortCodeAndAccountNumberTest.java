@@ -1,6 +1,5 @@
 package com.example.paul.integration;
 
-import com.example.paul.constants.CURRENCY;
 import com.example.paul.models.Account;
 import com.example.paul.repositories.AccountRepository;
 import org.junit.Test;
@@ -28,7 +27,7 @@ public class CheckFindBySortCodeAndAccountNumberTest {
     @Test
     public void whenFindBySortCodeAndAccountNumber_thenReturnAccountOwnerName() {
         // given
-        Account alex = new Account("bankName", "ownerName", "generateSortCode",  "generateAccountNumber", 0.0, CURRENCY.USD);
+        Account alex = new Account("bankName", "ownerName", "generateSortCode",  "generateAccountNumber", 0.0);
         entityManager.persist(alex);
         entityManager.flush();
 
@@ -36,7 +35,7 @@ public class CheckFindBySortCodeAndAccountNumberTest {
         Optional<Account> found = accountRepository.findBySortCodeAndAccountNumber(alex.getSortCode(), alex.getAccountNumber());
 
         // then
-        found.ifPresent(acc -> assertEquals(acc.getCurrency(), alex.getCurrency()));
+        found.ifPresent(acc -> assertEquals(acc.getSortCode(), alex.getSortCode()));
     }
 
 }
